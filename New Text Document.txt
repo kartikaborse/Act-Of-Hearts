@@ -1,0 +1,135 @@
+<?php
+session_start();
+// Example: Fetch session username if login is implemented
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Kartika'; 
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Act of Hearts - Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .dashboard {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .welcome {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .stats, .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat, .actions button {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .actions button {
+      background-color: #007bff;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    .feed-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="welcome">Welcome back, <?php echo htmlspecialchars($username); ?>! Let’s make the world a better place today. ❤️</div>
+
+    <div class="stats">
+      <div class="stat">Total Acts Posted<br><strong>28</strong></div>
+      <div class="stat">Hearts Received<br><strong>134</strong></div>
+      <div class="stat">Community Members<br><strong>92</strong></div>
+      <div class="stat">Top Contributor<br><strong>Riya M.</strong></div>
+    </div>
+
+    <div class="actions">
+      <button onclick="togglePostForm()">➕ Post a New Act</button>
+      <button onclick="toggleMyActs()">📜 View My Acts</button>
+      <button onclick="toggleCommunityPosts()">🔍 Browse Community</button>
+      <button onclick="goToProfile()">👤 My Profile</button>
+    </div>
+
+    <div class="new-post-form" id="newActForm" style="display:none;">
+      <div class="section-title">Post a New Noble Act</div>
+      <input type="text" id="username" placeholder="Your Name" value="<?php echo htmlspecialchars($username); ?>">
+      <textarea id="actDetails" rows="4" placeholder="Describe your noble act..."></textarea>
+      <button onclick="submitPost()">Submit</button>
+    </div>
+
+    <div class="my-acts" id="myActsSection" style="display:none;">
+      <div class="section-title">📜 My Acts</div>
+      <div id="myActsContainer"></div>
+    </div>
+
+    <div class="community-posts" id="communitySection" style="display:none;">
+      <div class="section-title">🌍 Browse Community</div>
+      <div class="feed-item">Ananya T: Volunteered at elderly care home.<br><small>Today</small></div>
+      <div class="feed-item">Yash R: Organized beach cleanup. 🧹<br><small>Yesterday</small></div>
+    </div>
+
+    <script>
+      function togglePostForm() {
+        const form = document.getElementById("newActForm");
+        form.style.display = form.style.display === "none" ? "block" : "none";
+      }
+
+      function toggleMyActs() {
+        const section = document.getElementById("myActsSection");
+        section.style.display = section.style.display === "none" ? "block" : "none";
+      }
+
+      function toggleCommunityPosts() {
+        const section = document.getElementById("communitySection");
+        section.style.display = section.style.display === "none" ? "block" : "none";
+      }
+
+      function goToProfile() {
+        window.location.href = "profile.php";
+      }
+
+      function submitPost() {
+        const username = document.getElementById("username").value.trim();
+        const actDetails = document.getElementById("actDetails").value.trim();
+        if (!username || !actDetails) {
+          alert("Please enter your name and act details.");
+          return;
+        }
+        const feedItem = `<div class='feed-item'><strong>${username}:</strong> ${actDetails}<br><small>Just now</small></div>`;
+        document.getElementById("myActsContainer").innerHTML += feedItem;
+        document.getElementById("username").value = "<?php echo htmlspecialchars($username); ?>";
+        document.getElementById("actDetails").value = "";
+        togglePostForm();
+      }
+    </script>
+  </div>
+</body>
+</html>
