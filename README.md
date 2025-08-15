@@ -14,3 +14,5 @@ Act of Hearts is designed to make every act of kindness visible, celebrated, and
 👤 Profile Customization – Update your profile to reflect your journey of goodness.
 🏢 NGO Registration – Verified NGOs can register and create an official presence.
 📅 NGO Event Posting – NGOs can post upcoming events to recruit volunteers and gain support.
+<img width="1918" height="906" alt="Screenshot 2025-08-15 150023" src="https://github.com/user-attachments/assets/aeabce37-ec14-4984-b351-c14a4afe403a" />
+<img width="1892" height="898" alt="Screenshot 2025-08-15 150144" src="https://github.com/user-attachments/assets/82d6f1e2-e055-426a-b76e-d6b5445cd7df" />
